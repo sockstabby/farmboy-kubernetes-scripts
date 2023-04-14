@@ -17,5 +17,16 @@ spec:
         image: workerimage
         args: ["start"]
         imagePullPolicy: Never
+        env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
         ports:
-        - containerPort: 80
+          - name: epmd
+            containerPort: 4369
+            protocol: TCP
