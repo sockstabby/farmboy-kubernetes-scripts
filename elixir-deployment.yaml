@@ -1,14 +1,39 @@
-apiVersion: batch/v1
-kind: Job
+---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: hello-world
+  name: my-elixir-app
+  namespace: default
+  labels:
+    app.kubernetes.io/name: my-elixir-app
+    app.kubernetes.io/instance: myapp-cluster
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: my-elixir-app
+      app.kubernetes.io/instance: myapp-node
   template:
     metadata:
-      name: hello-world-pod
+      labels:
+        app.kubernetes.io/name: my-elixir-app
+        app.kubernetes.io/instance: myapp-node
     spec:
       containers:
-      - name: hello-world
-        image: eric-elixir-test
-        imagePullPolicy: Never
-      restartPolicy: Never
+        - name: main
+          image: workerimage
+          imagePullPolicy: Never
+          env:
+            - name: RELEASE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: RELEASE_COOKIE
+              valueFrom:
+                secretKeyRef:
+                  name: my-elixir-app-cluster
+                  key: ERLANG_COOKIE
+          ports:
+            - name: epmd
+              containerPort: 4369
+              protocol: TCP

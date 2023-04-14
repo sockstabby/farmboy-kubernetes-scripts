@@ -1,0 +1,24 @@
+minikube start
+
+For building local docker images in Minikube
+eval $(minikube -p minikube docker-env)
+docker build . -t imagename  
+
+run 
+kubectl create -f myelixirdep.yaml
+to create 
+
+kubectl delete -f myelixirdep.yaml
+to delete
+
+
+kubectl get pods
+
+kubectl logs PODNAME_FROM_GET_PODS
+
+
+in another shell in the same container we can run 
+/opt/myapp/bin/worker remote
+
+Notice the name of the VM is.
+iex(worker@127.0.0.1)
