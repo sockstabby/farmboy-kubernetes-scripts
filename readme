@@ -11,10 +11,17 @@ to create
 kubectl delete -f myelixirdep.yaml
 to delete
 
+run the service
+kubectl create -f headless-svc.yaml  
+
 
 kubectl get pods
 
 kubectl logs PODNAME_FROM_GET_PODS
+
+terminate a pod
+
+kubectl delete pod ex-cluster-5b45c8577b-jltm9
 
 
 in another shell in the same container we can run 
@@ -22,3 +29,26 @@ in another shell in the same container we can run
 
 Notice the name of the VM is.
 iex(worker@127.0.0.1)
+
+should be
+"worker@10-244-0-55.default.pod.cluster.local"
+
+
+on another node run 
+/opt/myapp/bin/worker remote
+then run
+Node.connect :"worker@10-244-0-55.default.pod.cluster.local"
+
+
+Chat.start(1,2)
+{:ok, #PID<0.895.0>}
+iex(worker@10-244-0-63.default.pod.cluster.local)4> 
+
+
+
+22:50:23.985 [warning] [libcluster:k8s_example] unable to connect to :"worker@10.244.0.63"
+ 
+22:50:23.992 [warning] [libcluster:k8s_example] unable to connect to :"worker@10.244.0.64"
+
+22:50:23.999 [warning] [libcluster:k8s_example] unable to connect to :"worker@10.244.0.65"
+nil
