@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eworker-deployment
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  replicas: 3 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: worker
+        deployment: web
+    spec:
+      containers:
+      - name: eworker
+        image: workerimage
+        args: ["start"]
+        imagePullPolicy: Never
+        env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+        ports:
+          - name: epmd
+            containerPort: 4369
+            protocol: TCP

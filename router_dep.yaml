@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eworker-deployment
+  name: erouter-deployment
 spec:
   selector:
     matchLabels:
-      app: eworker
+      app: worker
   replicas: 3 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
-        app: eworker
+        app: worker
+        deployment: web
     spec:
       containers:
-      - name: eworker
-        image: workerimage
+      - name: erouter
+        image: routerimage
         args: ["start"]
         imagePullPolicy: Never
         env:
