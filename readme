@@ -23,9 +23,22 @@ terminate a pod
 
 kubectl delete pod ex-cluster-5b45c8577b-jltm9
 
+get inside pod
+
+
+################################################################################
+
+kubectl get pods
+
+
+kubectl exec -it  erouter-deployment-8959d78f8-2wclk -- /bin/sh
 
 in another shell in the same container we can run 
-/opt/myapp/bin/worker remote
+/opt/task_router/bin/task_router remote
+
+
+################################################################################################
+
 
 Notice the name of the VM is.
 iex(worker@127.0.0.1)
@@ -36,6 +49,16 @@ should be
 
 on another node run 
 /opt/myapp/bin/worker remote
+
+/opt/myapp/bin/hello remote
+
+or
+
+export CONT_NAME=erouter-deployment-8959d78f8-kng67 
+ericpeterson@Erics-MacBook-Pro kubernetes % kubectl exec -it ${CONT_NAME} -- /bin/sh         
+
+
+
 then run
 Node.connect :"worker@10-244-0-55.default.pod.cluster.local"
 
@@ -55,3 +78,8 @@ nil
 
 
 
+hello@10.244.0.231
+
+
+
+kubectl exec -it mongo-depl-5ccf565747-knsb5 -- /bin/bash
