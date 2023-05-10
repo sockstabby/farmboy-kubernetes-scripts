@@ -11,14 +11,12 @@ spec:
     metadata:
       labels:
         app: phoenix
-        deployment: web
+        deployment: cluster
     spec:
       containers:
-      - name: ephoenix
-        image: phoeniximage
-        args: ["start"]
-        imagePullPolicy: Never
-        env:
+        - name: ephoenix
+          image: edgerock/conts:phoeniximage10
+          env:
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
@@ -27,11 +25,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-        ports:
-          - name: phoenixport
-            containerPort: 4000
-            protocol: TCP
-          - name: epmd
-            containerPort: 4369
-            protocol: TCP
-            
+          ports:
+            - name: phoenixport
+              containerPort: 4000
+              protocol: TCP
+            - name: epmd
+              containerPort: 4369
+              protocol: TCP

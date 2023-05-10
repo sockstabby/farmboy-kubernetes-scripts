@@ -1,0 +1,3 @@
+#!/bin/bash
+kubectl -f $1 delete 
+kubectl -f $1 create

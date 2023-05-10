@@ -1,8 +1,16 @@
 minikube start
 
+minikube service hello-minikube1 --url 
+
+minikube service hello-minikube1 --url 
+
+
 For building local docker images in Minikube
 eval $(minikube -p minikube docker-env)
 docker build . -t imagename  
+
+kubectl create or delete on the dep files is all that is needed 
+run minikube tunnel in separate window
 
 run 
 kubectl create -f myelixirdep.yaml
@@ -48,7 +56,10 @@ should be
 
 
 on another node run 
-/opt/myapp/bin/worker remote
+/opt/worker/bin/worker remote
+
+/opt/task_router/bin/task_router remote
+
 
 /opt/myapp/bin/hello remote
 

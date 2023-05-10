@@ -6,19 +6,18 @@ spec:
   selector:
     matchLabels:
       app: worker
-  replicas: 3 # tells deployment to run 2 pods matching the template
+  replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
         app: worker
-        deployment: web
+        deployment: cluster
     spec:
       containers:
-      - name: eworker
-        image: workerimage
-        args: ["start"]
-        imagePullPolicy: Never
-        env:
+        - name: eworker
+          image: edgerock/conts:workerimage9
+          args: ["start"]
+          env:
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
@@ -27,7 +26,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-        ports:
-          - name: epmd
-            containerPort: 4369
-            protocol: TCP
+          ports:
+            - name: epmd
+              containerPort: 4369
+              protocol: TCP

@@ -11,14 +11,13 @@ spec:
     metadata:
       labels:
         app: worker
-        deployment: web
+        deployment: cluster
     spec:
       containers:
-      - name: erouter
-        image: routerimage
-        args: ["start"]
-        imagePullPolicy: Never
-        env:
+        - name: erouter
+          image: edgerock/conts:routerimage3
+          args: ["start"]
+          env:
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
@@ -27,7 +26,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-        ports:
-          - name: epmd
-            containerPort: 4369
-            protocol: TCP
+          ports:
+            - name: epmd
+              containerPort: 4369
+              protocol: TCP
