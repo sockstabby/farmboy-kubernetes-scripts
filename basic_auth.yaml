@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  auth: ZXJpYzokYXByMSRHYnUwN0NPTCRNaHEwSC41TVF3bmtYbkVRLmluTjExCg==
+kind: Secret
+metadata:
+  creationTimestamp: "2023-05-11T16:45:24Z"
+  name: basic-auth
+  namespace: default
+  resourceVersion: "5665588"
+  uid: 168efd9d-fe11-42fa-80e4-a070db924b9f
+type: Opaque

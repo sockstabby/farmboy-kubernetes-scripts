@@ -15,9 +15,12 @@ spec:
     spec:
       containers:
         - name: erouter
-          image: edgerock/conts:routerimage3
+          image: edgerock/conts:routerimage4
           args: ["start"]
           env:
+          env:
+            - name: TZ
+              value: America/Chicago
             - name: NAMESPACE
               valueFrom:
                 fieldRef:

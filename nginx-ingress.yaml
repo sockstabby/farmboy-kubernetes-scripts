@@ -7,6 +7,13 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 
+    # type of authentication
+    nginx.ingress.kubernetes.io/auth-type: basic
+    # name of the secret that contains the user/password definitions
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    # message to display with an appropriate context why the authentication is required
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - foo"
+
     nginx.ingress.kubernetes.io/server-snippets: |
       location / {
         proxy_set_header Upgrade $http_upgrade;
@@ -20,19 +27,12 @@ metadata:
         proxy_cache_bypass $http_upgrade;
         }
 spec:
+  tls:
+    - hosts:
+        - hw3.edgerock1.com
+      secretName: phoenix-tls
   rules:
-    - host: "hw1.edgerock1.com"
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: phoenix-svc
-                port:
-                  number: 4000
-
-    - host: "hw2.edgerock1.com"
+    - host: "hw3.edgerock1.com"
       http:
         paths:
           - pathType: Prefix

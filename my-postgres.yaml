@@ -5,11 +5,11 @@ metadata:
   namespace: default
 
 spec:
-  replicas: 3
+  replicas: 2
   image: postgres:14.1
 
   database:
-    size: 200Mi
+    size: 100Mi
 
   env:
     - name: POSTGRES_PASSWORD

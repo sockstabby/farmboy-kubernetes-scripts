@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: phoenix
-  replicas: 3 # tells deployment to run 2 pods matching the template
+  replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
@@ -15,8 +15,10 @@ spec:
     spec:
       containers:
         - name: ephoenix
-          image: edgerock/conts:phoeniximage10
+          image: edgerock/conts:phoeniximage23
           env:
+            - name: TZ
+              value: America/Chicago
             - name: NAMESPACE
               valueFrom:
                 fieldRef:
